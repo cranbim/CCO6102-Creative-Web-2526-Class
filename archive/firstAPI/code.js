@@ -1,4 +1,5 @@
 const latlong = document.getElementById("location");
+const suntimes = document.getElementById("suntimes");
 
 const myPosition={
     isActive:false,
@@ -26,5 +27,19 @@ function success(position) {
 
 function error() {
   alert("Sorry, no position available.");
+}
+
+function getSunTimes(){
+    let urlBase="https://api.sunrise-sunset.org/json?"
+    let query=urlBase+"lat="+myPosition.lat+"&lng="+myPosition.long
+    fetch(query)
+        .then(jdata=>jdata.json())
+        .then(processSunTimes)
+}
+
+function processSunTimes(sunData){
+  console.log(sunData)
+    suntimes.innerHTML = "sunrise: " + sunData.results.sunrise +
+  "<br>sunset: " + sunData.results.sunset
 }
 
