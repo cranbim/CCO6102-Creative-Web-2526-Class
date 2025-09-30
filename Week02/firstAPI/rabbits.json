@@ -1,0 +1,13 @@
+{
+    "rabbits": [
+        {
+            "name": "noodle",
+            "colour": "white"
+        },
+        {
+            "name": "blossom",
+            "colour": "agouti"
+        }
+    ]
+}
+
