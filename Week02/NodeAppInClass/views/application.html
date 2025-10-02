@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Application</h1>
+    <form action="/newrabbit" method="POST">
+        <label>name</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label>colour</label>
+        <input type="text" id="colour" name="colour">
+        <br>
+        <input type="submit" value="add rabbit">
+    </form>
+    <script>
+        fetch('/getrabbits')
+            .then(jdata=>jdata.json())
+            .then(processRabbitData)
+    
+        function processRabbitData(data){
+            console.log(data)
+            data.rabbits.forEach(rabbit=>{
+                let thisRabbit=`A rabbit called ${rabbit.name} is ${rabbit.colour}`
+                console.log(thisRabbit)
+            })
+        }
+    </script>
+</body>
+</html>
