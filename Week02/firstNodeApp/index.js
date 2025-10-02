@@ -3,6 +3,7 @@ const app = express()
 const path = require('path')
 
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: false}))
 
 app.listen(3000, ()=>{
     console.log('listening on port 3000')
@@ -12,12 +13,23 @@ app.get('/test', (request, response)=>{
     response.sendFile(path.join(__dirname,'/views','notatest.html'))
 })
 
-app.get('/dave', (request, response)=>{
-    response.sendFile(path.join(__dirname,'/views','davesays.html'))
+app.get('/app', (request, response)=>{
+    response.sendFile(path.join(__dirname,'/views','application.html'))
 })
 
 app.get('/getrabbits', (request, response)=>{
     response.json({rabbits: rabbitData})
+})
+
+app.post('/newrabbit', (request, response)=>{
+    console.log(request.body)
+    let newRabbit={
+        name:request.body.name,
+        colour:request.body.colour,
+        yod:request.body.yod
+    }
+    rabbitData.push(newRabbit)
+    console.log(rabbitData)
 })
 
 
