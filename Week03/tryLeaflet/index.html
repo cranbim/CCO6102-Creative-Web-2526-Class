@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <title>Document</title>
+    <style>
+        #map { height: 30vh; }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My page</h1>
+    <p>Here is some text</p><br>
+    <button onclick="getLocation()">get location</button>
+    
+    <p>This is a map</p>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function error(err){
+            console.log(err)
+        }
+
+        function success(position) {
+            console.log(position)
+            map.setView([position.coords.latitude, position.coords.longitude], 13)
+            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+        }
+    </script>
+</body>
+</html>
