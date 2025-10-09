@@ -18,7 +18,7 @@ app.get('/app', (request, response)=>{
 })
 
 app.get('/getposts', (request, response)=>{
-    response.json({myPostData:posts.getPosts()})
+    response.json({pots:posts.getPosts()})
 })
 
 app.post('/newpost', (request, response)=>{

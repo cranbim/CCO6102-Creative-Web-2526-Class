@@ -30,7 +30,7 @@
         function processData(data){
             console.log(data)
             recentPosts.innerHTML=""
-            data.myPostData.forEach(post=>{
+            data.posts.forEach(post=>{
                 let li=document.createElement('li')
                 li.innerText=`${post.message} by user: ${post.user}`
                 recentPosts.appendChild(li)
