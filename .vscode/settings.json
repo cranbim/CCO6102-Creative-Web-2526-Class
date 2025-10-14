@@ -1,3 +1,5 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "appService.defaultWebAppToDeploy": "/subscriptions/a022aee1-733f-4906-83bd-c7955676a92e/resourceGroups/appsvc_linux_westeurope/providers/Microsoft.Web/sites/BSU-CCO6102-websockets-basic",
+    "appService.deploySubpath": "Week04\\Websockets\\socketServer"
 }
