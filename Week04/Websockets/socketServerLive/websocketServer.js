@@ -2,11 +2,10 @@
 const express=require('express')
 const app=express()
 const path=require('path')
-// const PORT=3000
-//process.env.PORT
+const PORT=3000
 
-app.listen(process.env.PORT, ()=>{
-  console.log('listening on port for HTTP',process.env.PORT)
+app.listen(PORT, ()=>{
+  console.log('listening on port for HTTP',PORT)
 })
 
 app.use(express.static('public'))
