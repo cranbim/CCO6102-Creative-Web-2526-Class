@@ -6,9 +6,9 @@ const queryurl='http://api.weatherapi.com/v1/current.json'+
                 '&'+'q='+City+
                 '&'+'aqi='+'no'
 
-                let counter=0;
-                let countInterval;
-                
+let counter=0;
+let countInterval;
+
                 
 function getData() {
     countInterval=setInterval(()=>console.log(counter++/10),100);
