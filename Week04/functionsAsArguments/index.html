@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>functions as arguments</h1>
+    <p>open the console</p>
+    <script>
+        function testIfEven(num){
+            return num%2==0
+        }
+
+        function testIfOdd(num){
+            return num%2!=0
+        }
+
+        function yay(){
+            console.log("your number is even")
+        }
+
+        function boo(){
+            console.log("your number is NOT even")
+        }
+
+        function testThisNumber(num, test, action1, action2){
+               if(test(num)){
+                 action1()
+               } else {
+                action2()
+               }
+        }
+
+        testThisNumber(10, testIfEven, yay, boo)
+        testThisNumber(7, testIfOdd, boo, yay)
+
+
+        
+    </script>
+</body>
+</html>
