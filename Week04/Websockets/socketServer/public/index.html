@@ -20,10 +20,12 @@
 
         //copied code
         console.log(document.location.hostname) 
-        var connection = new WebSocket('ws://'+document.location.hostname+':8011/');//127.0.0.1
+        var connection = new WebSocket('ws://'+document.location.hostname+':3000/');//127.0.0.1
+        // var connection = new WebSocket('wss://'+document.location.hostname+':3000/');//127.0.0.1
 
         connection.onopen = function () {
             //send browser identity string
+            console.log("connected ws")
             connection.send(JSON.stringify('I am a web browser'));
         };
 
