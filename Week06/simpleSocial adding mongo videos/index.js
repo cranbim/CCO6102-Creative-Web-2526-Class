@@ -50,11 +50,11 @@ app.get('/profile', checkLoggedIn, (request, response)=>{
 })
 
 app.get('/getposts', (request, response)=>{
-    response.json({pots:posts.getPosts()})
+    response.json({posts:posts.getLastNPosts()})
 })
 
 app.post('/newpost', (request, response)=>{
-    posts.addPost(request.body.message, "userX")
+    posts.addPost(request.body.message, request.session.username)
     response.sendFile(path.join(__dirname, '/views', 'app.html'))
 })
 

@@ -50,7 +50,7 @@ app.get('/profile', checkLoggedIn, (request, response)=>{
 })
 
 app.get('/getposts', (request, response)=>{
-    response.json({pots:posts.getPosts()})
+    response.json({posts:posts.getPosts()})
 })
 
 app.post('/newpost', (request, response)=>{

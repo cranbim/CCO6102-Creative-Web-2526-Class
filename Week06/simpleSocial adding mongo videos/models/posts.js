@@ -1,4 +1,4 @@
-let nextPostID=2
+let nextPostID=3
 
 let postData=[
     {
@@ -9,6 +9,10 @@ let postData=[
         postid: 1,
         message:"Glad it's Thursday",
         user:"Julie"
+    },{
+        postid: 2,
+        message:"I'm hungry",
+        user:"Sam"
     }
 ]
 
@@ -25,7 +29,12 @@ function addPost(message, user){
     postData.push(newPost)
 }
 
+function getLastNPosts(n=3){
+    return postData.slice(-n).reverse()
+}
+
 module.exports={
     getPosts,
-    addPost
+    addPost,
+    getLastNPosts
 }
