@@ -18,6 +18,18 @@ app.use(sessions({
     saveUninitialized: false
 }))
 
+const dotenv=require('dotenv').config()
+
+const mongoose=require("mongoose")
+const mongoDBPassword= process.env.MONGODB_PASSWORD
+const mongoDBuser= process.env.MONGODB_USERNAME
+const mongoDBappName= process.env.MONGODB_MYAPPNAME
+
+const connectionString=`mongodb+srv://${mongoDBuser}:${mongoDBPassword}@cluster0.lpfnqqx.mongodb.net/${mongoDBappName}?retryWrites=true&w=majority`
+console.log(connectionString)
+mongoose.connect(connectionString)
+
+
 app.listen(3000, ()=>{
     console.log('listening on port 3000')
 })
@@ -49,8 +61,8 @@ app.get('/profile', checkLoggedIn, (request, response)=>{
     response.sendFile(path.join(__dirname, '/views', 'profile.html'))
 })
 
-app.get('/getposts', (request, response)=>{
-    response.json({posts:posts.getLastNPosts()})
+app.get('/getposts', async (request, response)=>{
+    response.json({posts: await posts.getLastNPosts()})
 })
 
 app.post('/newpost', (request, response)=>{

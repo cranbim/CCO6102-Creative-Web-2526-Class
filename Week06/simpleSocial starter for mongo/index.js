@@ -11,12 +11,15 @@ const cookieParser=require('cookie-parser')
 const threeMinutes= 3*60*1000
 const oneHour = 1*60*60*1000
 
+const dotenv=require('dotenv').config()
+
 app.use(sessions({
     secret:"my own secret phrase",
     cookie: {maxAge: threeMinutes},
     resave: false,
     saveUninitialized: false
 }))
+
 
 app.listen(3000, ()=>{
     console.log('listening on port 3000')
