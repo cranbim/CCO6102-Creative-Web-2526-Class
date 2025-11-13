@@ -11,12 +11,13 @@
 //         user:"Julie"
 //     },{
 //         postid: 2,
-//         message:"I'm hungry",
-//         user:"Sam"
+//         message:"I am a post",
+//         user:"Noodle"
 //     }
 // ]
 
 const mongoose=require('mongoose')
+
 const {Schema, model} = mongoose
 
 const postSchema=new Schema({
@@ -26,10 +27,17 @@ const postSchema=new Schema({
     time: Date
 })
 
-const postData=model('posts', postSchema)
+const postData=model('postsDave', postSchema)
 
 function getPosts(){
     return postData.slice()
+}
+
+async function getLatestNPosts(n=3){
+    // return postData.slice(-n).reverse()
+    let foundData=[]
+    foundData=await postData.find({}).sort({'time':-1}).limit(n).exec()
+    return foundData
 }
 
 function addPost(message, user){
@@ -40,22 +48,14 @@ function addPost(message, user){
         likes: 0,
         time: Date.now()
     }
-    // postData.push(newPost)
     postData.create(newPost)
     .catch(err=>{
-        console.log("Error: ", err)
+        console.log("Error",err)
     })
-}
-
-async function getLastNPosts(n=3){
-    // postData.slice(-n).reverse()
-    let foundPosts=[]
-    foundPosts=await postData.find({}).sort({'time':-1}).limit(n).exec()
-    return foundPosts
 }
 
 module.exports={
     getPosts,
     addPost,
-    getLastNPosts
+    getLatestNPosts
 }

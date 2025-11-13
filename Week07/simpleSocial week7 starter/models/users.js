@@ -1,27 +1,19 @@
-// let userData=[
-//     {
-//         username: "user1",
-//         password: "123"
-//     },{
-//         username: "user2",
-//         password: "456"
-//     }
-// ]
 
 const mongoose=require('mongoose')
+
 const {Schema, model} = mongoose
 
 const userSchema=new Schema({
     username: String,
-    password: String
+    password: String,
 })
 
-const userData=model('users', userSchema)
+const userData=model('user', userSchema)
 
 async function addUser(usernameFromForm, password){
     // let found=userData.find(thisUser=>thisUser.username==username)
     let found=null
-    found=await userData.findOne({username:usernameFromForm})
+    found=await userData.findOne({username:usernameFromForm}).exec()
     if(found){
         return false
     } else {
@@ -29,7 +21,6 @@ async function addUser(usernameFromForm, password){
             username:usernameFromForm,
             password:password
         }
-        // userData.push(newUser)
         await userData.create(newUser)
         return true
     }
@@ -38,7 +29,7 @@ async function addUser(usernameFromForm, password){
 async function checkUser(usernameFromForm, password){
     // let found=userData.find(thisUser=>thisUser.username==username)
     let found=null
-    found=await userData.findOne({username:usernameFromForm})
+    found=await userData.findOne({username:usernameFromForm}).exec()
     if(found){
         return found.password==password
     } else {

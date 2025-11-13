@@ -11,23 +11,22 @@ const cookieParser=require('cookie-parser')
 const threeMinutes= 3*60*1000
 const oneHour = 1*60*60*1000
 
+const dotenv=require('dotenv').config()
+const mongoDBUsername=process.env.mongoDBUsername
+const mongoDBPassword=process.env.mongoDBPassword
+const mongoAppName=process.env.mongoAppName
+// console.log(mongoDBUsername, mongoDBPassword, mongoAppName)
+const connectionString=`mongodb+srv://${mongoDBUsername}:${mongoDBPassword}@cluster0.lpfnqqx.mongodb.net/${mongoAppName}?retryWrites=true&w=majority`
+
+const mongoose=require('mongoose')
+mongoose.connect(connectionString)
+
 app.use(sessions({
     secret:"my own secret phrase",
     cookie: {maxAge: threeMinutes},
     resave: false,
     saveUninitialized: false
 }))
-
-const dotenv=require('dotenv').config()
-
-const mongoose=require("mongoose")
-const mongoDBPassword= process.env.MONGODB_PASSWORD
-const mongoDBuser= process.env.MONGODB_USERNAME
-const mongoDBappName= process.env.MONGODB_MYAPPNAME
-
-const connectionString=`mongodb+srv://${mongoDBuser}:${mongoDBPassword}@cluster0.lpfnqqx.mongodb.net/${mongoDBappName}?retryWrites=true&w=majority`
-console.log(connectionString)
-mongoose.connect(connectionString)
 
 
 app.listen(3000, ()=>{
@@ -61,8 +60,8 @@ app.get('/profile', checkLoggedIn, (request, response)=>{
     response.sendFile(path.join(__dirname, '/views', 'profile.html'))
 })
 
-app.get('/getposts',  async (request, response)=>{
-    response.json({posts:  await posts.getLastNPosts()})
+app.get('/getposts', async (request, response)=>{
+    response.json({posts: await posts.getLatestNPosts(3)})
 })
 
 app.post('/newpost', (request, response)=>{
