@@ -54,16 +54,16 @@ function checkLoggedIn(request, response, nextAction){
     }
 }
 
-function checkLoggedInState(request){
+function getLoggedInState(request){
     return request.session && request.session.username
 }
 
 app.get('/app', checkLoggedIn, async (request, response)=>{
     // response.sendFile(path.join(__dirname, '/views', 'app.html'))
     response.render('pages/app',{
-        isLoggedIn: checkLoggedInState(request),
-        username: request.session.username,
-        posts: await posts.getLatestNPosts(3)
+         username: request.session.username,
+         isLoggedIn: getLoggedInState(request),
+         posts: await posts.getLatestNPosts(3)
     })
 })
 
@@ -75,28 +75,24 @@ app.get('/getposts', async (request, response)=>{
     response.json({posts: await posts.getLatestNPosts(3)})
 })
 
-app.post('/newpost', async (request,  response)=>{
+app.post('/newpost', (request, response)=>{
     posts.addPost(request.body.message, request.session.username)
-    // response.sendFile(path.join(__dirname, '/views', 'app.html'))
-    response.render('pages/app',{
-        isLoggedIn: checkLoggedInState(request),
-        username: request.session.username,
-        posts: await posts.getLatestNPosts(3)
-    })
+    response.sendFile(path.join(__dirname, '/views', 'app.html'))
 })
 
 app.get('/login', (request, response)=>{
     // response.sendFile(path.join(__dirname, '/views', 'login.html'))
-    response.render('pages/login.ejs',{isLoggedIn: checkLoggedInState(request)})
+    response.render('pages/login',{
+        isLoggedIn: getLoggedInState(request)
+    })
 })
 
 app.post('/login', async (request, response)=>{
     if(await userModel.checkUser(request.body.username, request.body.password)){
         request.session.username=request.body.username
-        // response.sendFile(path.join(__dirname, '/views', 'app.html'))
         response.render('pages/app',{
-            isLoggedIn: checkLoggedInState(request),
             username: request.session.username,
+            isLoggedIn: getLoggedInState(request),
             posts: await posts.getLatestNPosts(3)
         })
     } else {
