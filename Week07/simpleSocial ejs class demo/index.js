@@ -14,7 +14,7 @@ const oneHour = 1*60*60*1000
 const dotenv=require('dotenv').config()
 const mongoDBUsername=process.env.mongoDBUsername
 const mongoDBPassword=process.env.mongoDBPassword
-const mongoAppName=process.env.mongoAppName
+const mongoAppName="myLuckyApp"//process.env.mongoAppName
 // console.log(mongoDBUsername, mongoDBPassword, mongoAppName)
 const connectionString=`mongodb+srv://${mongoDBUsername}:${mongoDBPassword}@cluster0.lpfnqqx.mongodb.net/${mongoAppName}?retryWrites=true&w=majority`
 

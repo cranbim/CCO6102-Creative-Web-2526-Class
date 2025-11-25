@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Change Button Label</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input[type="button"] { padding: 10px 20px; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- Button with initial label -->
+<input type="button" id="myButton" value="Click Me">
+
+<script>
+  // Get the button element
+  const btn = document.getElementById('myButton');
+
+  // Add click event listener
+  btn.addEventListener('click', function () {
+    // Change the label by updating the 'value' property
+    if (btn.value === "Click Me") {
+      btn.value = "Clicked!";
+    } else {
+      btn.value = "Click Me";
+    }
+  });
+</script>
+
+</body>
+</html>

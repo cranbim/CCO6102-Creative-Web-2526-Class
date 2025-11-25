@@ -29,8 +29,10 @@ const postSchema=new Schema({
 
 const postData=model('postsDave', postSchema)
 
-function getPosts(){
-    return postData.slice()
+async function getPosts(){
+     let foundData=[]
+    foundData=await postData.find({}).exec()
+    return foundData
 }
 
 async function getLatestNPosts(n=3){
